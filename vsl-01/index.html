@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LipoMax</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script
+      type="text/javascript"
+      src="https://5wu8h.ttrk.io/track.js"
+    ></script>
+
+    <!--style btn-primary-->
+    <style>
+      /* Responsividade para mobile */
+      @media (max-width: 768px) {
+        #floatingVideoButton {
+          bottom: 20px;
+          right: 20px;
+          font-size: 14px;
+          padding: 12px 16px;
+        }
+
+        /* Reordenação dos produtos no mobile */
+        .product-1-bottle {
+          order: 3;
+        }
+        .product-3-bottles {
+          order: 2;
+        }
+        .product-6-bottles {
+          order: 1;
+        }
+
+        /* Mudar para flexbox no mobile para permitir reordenação */
+        .products-grid {
+          display: flex !important;
+          flex-direction: column;
+          gap: 1rem;
+        }
+      }
+
+      /* Garantir que em desktop mantenha grid */
+      @media (min-width: 768px) {
+        .products-grid {
+          display: grid !important;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1rem;
+        }
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #4be91b, #27ff13, #00ff2a);
+        color: white;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        position: relative;
+        overflow: hidden;
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+        animation-play-state: paused;
+      }
+
+      .btn-primary:active {
+        transform: translateY(0) scale(0.98);
+      }
+
+      /* Animação pulsante suave */
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+          transform: scale(1);
+        }
+        50% {
+          box-shadow: 0 4px 25px rgba(16, 185, 129, 0.5);
+          transform: scale(1.05);
+        }
+        100% {
+          box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+          transform: scale(1);
+        }
+      }
+
+      /* Efeito de brilho no hover */
+      .btn-primary::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transition: left 0.5s;
+      }
+
+      .btn-primary:hover::before {
+        left: 100%;
+      }
+
+      /* FAQ Accordion Styles */
+      .accordion-button {
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .accordion-button:hover {
+        background-color: #f8f9fa !important;
+      }
+
+      .accordion-button:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      }
+
+      .accordion-collapse {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease, opacity 0.3s ease;
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .accordion-collapse.show {
+        max-height: 1000px;
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .accordion-button span {
+        transition: transform 0.3s ease;
+      }
+
+      .accordion-button[aria-expanded="true"] span {
+        transform: rotate(180deg);
+      }
+
+      /* Force text color for accordion body */
+      .accordion-body {
+        color: #000000 !important; /* text-black */
+      }
+
+      .accordion-body strong {
+        color: #000000 !important; /* text-black */
+        font-weight: 700;
+      }
+    </style>
+
+    <!--style video-->
+    <style>
+      #video {
+        position: relative;
+        overflow: hidden;
+      }
+
+      #video::after {
+        content: "";
+        position: absolute;
+        width: 20%;
+        top: -30px;
+        left: -59px;
+        height: 150px;
+        transform: rotate(150deg);
+        background: url(./assets/vetor-video-vsl.png) center center repeat;
+        background-size: contain;
+        opacity: 0.1;
+        pointer-events: none;
+      }
+
+      .smartplayer-headline {
+        display: none;
+      }
+
+      @media (max-width: 991px) {
+        #video::after {
+          top: -50px;
+          left: 0;
+          height: 123px;
+          transform: rotate(234deg);
+        }
+      }
+
+      #video::before {
+        content: "";
+        position: absolute;
+        width: 20%;
+        top: -53px;
+        right: -31px;
+        height: 150px;
+        transform: rotate(34deg);
+        background: url(./assets/vetor-video-vsl.png) center center repeat;
+        background-size: contain;
+        opacity: 0.1;
+        pointer-events: none;
+      }
+
+      @media (max-width: 991px) {
+        #video::before {
+          top: -50px;
+          right: 0;
+          height: 123px;
+          transform: rotate(129deg);
+        }
+      }
+
+      @media (max-width: 991px) {
+        #video h2.font-video {
+          font-size: 24px;
+        }
+      }
+
+      @media (max-width: 991px) {
+        #video p.font-p-video {
+          font-size: 16px;
+          line-height: 20px;
+        }
+      }
+
+      #video .vetor1 {
+        position: absolute;
+        width: 50%;
+        height: 531px;
+        top: 20%;
+        left: 0;
+        background: url("./assets/v-left.png");
+        background-size: contain;
+        z-index: -2;
+        opacity: 0.3;
+      }
+
+      @media (max-width: 991px) {
+        #video .vetor1 {
+          top: inherit;
+          bottom: -205px;
+        }
+      }
+
+      #video .vetor2 {
+        position: absolute;
+        width: 50%;
+        height: 531px;
+        top: 20%;
+        right: 0;
+        background: url("./assets/v-right.png") center right no-repeat;
+        background-size: contain;
+        z-index: -2;
+        opacity: 0.3;
+      }
+
+      @media (max-width: 991px) {
+        #video .vetor2 {
+          top: inherit;
+          bottom: -205px;
+          right: 0;
+        }
+      }
+    </style>
+
+    <!--style commentarios facebook-->
+    <style>
+      #fb-comments {
+        font-family: "Segoe UI Historic", "Segoe UI", Helvetica, Arial,
+          sans-serif;
+        font-size: 13px;
+        width: 100%;
+        margin: auto;
+      }
+
+      #fb-comments .fb-heading {
+        margin: 2.125em 0 0.625em;
+        font-size: 1.1em;
+        color: #555;
+        font-weight: 400;
+        text-align: left;
+      }
+
+      #fb-comments .comments-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25em;
+        border: 0.0625em solid #e9ebee;
+        border-radius: 1.25em;
+        padding: 1.25em 1.25em 0;
+      }
+
+      #fb-comments .comment {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+        gap: 0.625em;
+      }
+
+      #fb-comments .comment.answer {
+        margin-left: 3.625em;
+        max-width: calc(100% - 3.625em);
+        margin-bottom: 0.75em;
+      }
+
+      #fb-comments .comment.answer + .answer {
+        margin-top: -0.75em;
+      }
+
+      #fb-comments .comment .user-avatar {
+        max-width: 3em;
+        max-height: 3em;
+        border-radius: 1.5625em;
+        -o-object-fit: cover;
+        object-fit: cover;
+      }
+
+      #fb-comments .comment .comment-data {
+        width: 100%;
+      }
+
+      #fb-comments .comment .comment-data .user {
+        font-weight: 400;
+        color: #050505;
+        border-radius: 0.75em;
+        background-color: #f0f2f5;
+        padding: 0.375em 0.75em 0.75em;
+      }
+
+      #fb-comments .comment .comment-data .user .name {
+        margin: 0;
+        color: #365899;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 16px;
+        cursor: pointer;
+        max-width: -webkit-max-content;
+        max-width: -moz-max-content;
+        max-width: max-content;
+      }
+
+      #fb-comments .comment .comment-data .user .text {
+        margin: 0;
+        font-weight: 400;
+        font-size: 16px;
+        color: #050505;
+        width: fit-content;
+        text-align: left;
+      }
+
+      #fb-comments .comment .comment-data .buttons {
+        margin: 0.125em 0 0 0.75em;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 0.3125em;
+      }
+
+      #fb-comments .comment .comment-data .buttons time,
+      #fb-comments .comment .comment-data .buttons like,
+      #fb-comments .comment .comment-data .buttons answer,
+      #fb-comments .comment .comment-data .buttons span {
+        font-size: 0.8em;
+        color: #888;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      #fb-comments .comment .comment-data .buttons like,
+      #fb-comments .comment .comment-data .buttons answer {
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      #fb-comments .comment .comment-data .buttons like[liked] {
+        color: #365899;
+      }
+
+      #fb-comments .comment .comment-data .buttons answer {
+        cursor: default;
+        position: relative;
+      }
+
+      #fb-comments .comment .comment-data .buttons answer:hover::after {
+        content: "You cannot comment on this post";
+        position: absolute;
+        left: 50%;
+        top: -0.625em;
+        width: 11.25em;
+        background-color: #f0f2f5;
+        color: #4c4c4c;
+        transform: translate(-50%, -100%);
+        z-index: 10;
+        border-radius: 0.25em;
+        padding: 0.375em;
+        text-align: center;
+        font-weight: 400;
+        box-shadow: 0.125em 0.125em 0.5em 0.125em rgba(0, 0, 0, 0.1803921569);
+      }
+
+      #fb-comments .comment .comment-data .buttons answer:hover::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: -0.625em;
+        width: 0;
+        height: 0;
+        border-left: 0.5em solid rgba(0, 0, 0, 0);
+        border-right: 0.5em solid rgba(0, 0, 0, 0);
+        border-top: 0.5em solid #f0f2f5;
+        z-index: 11;
+        transform: translateX(-50%);
+        filter: drop-shadow(0 0.1875em 0.125em rgba(0, 0, 0, 0.1));
+      }
+
+      #fb-comments .comment likes {
+        position: absolute;
+        bottom: -0.625em;
+        right: 0;
+        background-color: #fff;
+        border: 0.125em solid #eaebef;
+        display: flex;
+        align-items: center;
+        font-size: 0.875em;
+        line-height: 1;
+        color: #888;
+        border-radius: 6.25em;
+        padding: 0.0625em 0.25em 0.0625em 0;
+      }
+
+      #fb-comments .comment likes::before {
+        content: url("./assets/img/likes.webp");
+        cursor: pointer;
+      }
+
+      #fb-comments .comments-closed {
+        font-size: 0.875em;
+        font-weight: 600;
+        text-align: center;
+        margin: 0.9375em 0 5px;
+        color: #555;
+      }
+
+      @media (min-width: 576px) {
+        #fb-comments {
+          font-size: 16px;
+        }
+
+        #fb-comments .comment likes {
+          bottom: 0;
+        }
+      }
+    </style>
+
+    <!--hidden esconder-->
+    <style>
+      .hiddendiv {
+        display: block;
+      }
+    </style>
+    
+    		<!-- Preload Vturb -->
+
+<script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
+<link rel="preload" href="https://scripts.converteai.net/23a33b05-c7a2-42e3-8c62-2fb736e627e8/players/68f9543d52248005222553ae/v4/player.js" as="script">
+<link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
+<link rel="preload" href="https://cdn.converteai.net/23a33b05-c7a2-42e3-8c62-2fb736e627e8/68f9533fb6eef1c8dc746997/main.m3u8" as="fetch">
+<link rel="dns-prefetch" href="https://cdn.converteai.net">
+<link rel="dns-prefetch" href="https://scripts.converteai.net">
+<link rel="dns-prefetch" href="https://images.converteai.net">
+<link rel="dns-prefetch" href="https://api.vturb.com.br">
+		<!-- Preload Vturb -->
+		
+  </head>
+  <body>
+    <section id="video" class="pt-5 pb-3">
+      <h2
+        class="text-center text-4xl font-bold mb-5 max-md:text-2xl max-md:px-8"
+      >
+        Just 4 Ingredients!
+      </h2>
+      <h3
+        class="text-center text-2xl font-bold mb-5 max-md:text-xl max-md:px-8"
+      >
+        This is the <span style="color: red">new recipe</span> women are
+        using to help drop  <br />
+        <span style="background-color: red; color: white; padding: 2px"
+          >pounds</span
+        >
+      </h3>
+
+      <div class="max-w-7xl mx-auto">
+        <div class="relative">
+          <!-- Background div com vetor-video-vsl.png -->
+          <div
+            class="inset-0 bg-contain bg-center bg-no-repeat w-full absolute"
+            style="background-image: url('./assets/vetor-video-vsl.png')"
+          ></div>
+
+          <div
+            class="flex items-center justify-center mx-auto relative z-10 p-11 max-md:p-4"
+          >
+            <!-- VTURB AQUI -->
+            <vturb-smartplayer id="vid-68f9543d52248005222553ae" style="display: block; margin: 0 auto; width: 100%; "></vturb-smartplayer> <script type="text/javascript"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/23a33b05-c7a2-42e3-8c62-2fb736e627e8/players/68f9543d52248005222553ae/v4/player.js", s.async=!0,document.head.appendChild(s); </script>
+            <!-- FIM VTURB -->
+          </div>
+        </div>
+      </div>
+      <div class="vetor1"></div>
+      <div class="vetor2"></div>
+    </section>
+    <!--ESCONDER-->
+    
+
+        <section class="text-center py-10" id="products">
+          <div class="flex items-center justify-center">
+            <img
+              src="https://i.ibb.co/xt998vxV/Captura-de-tela-2025-09-24-115904.png"
+              alt=""
+            />
+          </div>
+          <div class="mx-auto px-4 max-w-7xl">
+            <div
+              class="grid grid-cols-1 md:grid-cols-3 gap-4 mx-auto products-grid"
+            >
+              <!-- 3 Bottles -->
+
+              <div
+                class="shadow-2xl block sm:mx-0 my-10 mx-4 text-center border-2 border-padraoGrenn relative product-1-bottle rounded-lg"
+              >
+                <div class="text-black m-1 mt-2 rounded-lg">
+                  <h3 class="font-medium text-xl mb-3 capitalize">
+                    <span class="font-bold">2 BOTTLES</span> <br />
+                    <span class="font-thin">60 DAYS SUPPLY</span>
+                  </h3>
+                  <img
+                    src="https://i.ibb.co/nMDc6dxD/FLB-2-POTES-1-1024x922.webp"
+                    alt="FloraLean"
+                    class="w-full h-auto px-4"
+                    title="FloraLean"
+                  />
+                  <div class="flex justify-center items-center mx-auto">
+                    <h4 class="font-bold text-6xl">$79</h4>
+                    <div class="flex flex-col items-start font-bold text-sm">
+<p>PER</p>
+<p class="-mt-2">BOTTLE</p>
+                    </div>
+                  </div>
+                  <div class="mt-4">
+                    <p
+class="font-bold text-xl py-2 w-full border-t border-b border-dashed text-center border-black"
+                    >
+YOU SAVE $200!
+                    </p>
+
+                    <p
+class="font-bold text-xl py-2 w-full border-t border-b border-dashed text-center border-black"
+                    >
+60 DAYS GUARANTEE
+                    </p>
+                  </div>
+
+                  <div class="text-white p-5 mx-4 rounded-lg mb-4">
+                    <a
+href="https://track.trickgelatin.com/click/1"
+class="no-underline"
+                    >
+<button
+  class="btn-primary w-full mt-8 max-md:mt-0 max-lg:mt-9 max-lg:text-base rounded border border-green-300 inline-block cursor-pointer text-white font-montserrat text-3xl max-md:text-xl max-sm:text-base font-bold py-3 text-center no-underline"
+>
+  ADD TO CART
+</button>
+                    </a>
+                    <div class="text-sm mt-4 text-black">
+<p class="font-bold">
+  Total:
+  <span class="line-through text-red-500 text-thin"
+    >$258</span
+  >
+  <span>$158</span>
+</p>
+<p class="font-bold"><span class="">+</span> SHIPPING</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 6 Bottles -->
+
+              <div
+                class="shadow-2xl block sm:mx-0 my-10 mx-4 text-white text-center border-2 border-padraoGrenn relative product-6-bottles rounded-lg"
+              >
+                <h1 class="text-black text-center font-bold text-2xl">
+                  BEST VALUE!
+                </h1>
+                <div class="bg-[#495d54] m-1 mt-2 rounded-lg">
+                  <h3 class="font-medium text-xl mb-3 capitalize text-white">
+                    <span class="font-bold">6 BOTTLES</span> <br />
+                    <span class="font-thin">180 DAYS SUPPLY</span>
+                  </h3>
+                  <img
+                    src="https://i.ibb.co/1Y3Mr8Xd/FLB-6-1-1-1024x1024.webp"
+                    alt="FloraLean"
+                    class="w-full h-auto px-4"
+                    title="FloraLean"
+                  />
+                  <div class="flex justify-center items-center mx-auto">
+                    <h4 class="font-bold text-6xl">$49</h4>
+                    <div class="flex flex-col items-start font-bold text-sm">
+<p>PER</p>
+<p class="-mt-2">BOTTLE</p>
+                    </div>
+                  </div>
+                  <div class="mt-4">
+                    <p
+class="font-bold text-xl py-2 w-full border-t border-b border-dashed text-center border-white"
+                    >
+YOU SAVE $780!
+                    </p>
+                    <p
+class="font-bold text-xl py-2 w-full border-t border-b border-dashed text-center border-white"
+                    >
+BIGGET DISCOUNT
+                    </p>
+                    <p
+class="font-bold text-xl py-2 w-full border-t border-b border-dashed text-center border-white"
+                    >
+
+                    </p>
+                    <p
+class="font-bold text-xl py-2 w-full border-t border-b border-dashed text-center border-white"
+                    >
+60 DAYS GUARANTEE
+                    </p>
+                  </div>
+
+                  <div class="text-white p-5 mx-4 rounded-lg mb-4">
+                    <a
+href="https://track.trickgelatin.com/click/3"
+class="no-underline"
+                    >
+<button
+  class="btn-primary w-full mt-8 max-md:mt-0 max-lg:mt-9 max-lg:text-base rounded border border-green-300 inline-block cursor-pointer text-white font-montserrat text-3xl max-md:text-xl max-sm:text-base font-bold py-3 text-center no-underline"
+>
+  ADD TO CART
+</button>
+                    </a>
+                    <div class="text-sm mt-4">
+<p class="font-bold">
+  Total:
+  <span class="line-through text-red-500 text-thin"
+    >$1074</span
+  >
+  <span>$294</span>
+</p>
+<p class="font-bold">
+  <span class="">+ FREE</span> SHIPPING
+</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 3 Bottles -->
+
+              <div
+                class="shadow-2xl block sm:mx-0 my-10 mx-4 text-center border-2 border-padraoGrenn relative product-3-bottles rounded-lg"
+              >
+                <div class="text-black m-1 mt-2 rounded-lg">
+                  <h3 class="font-medium text-xl mb-3 capitalize">
+                    <span class="font-bold">3 BOTTLES</span> <br />
+                    <span class="font-thin">90 DAYS SUPPLY</span>
+                  </h3>
+                  <img
+                    src="https://i.ibb.co/Pz0VdtJM/FLB-3-1-1-1024x1024.webp"
+                    alt="FloraLean"
+                    class="w-full h-auto px-4"
+                    title="FloraLean"
+                  />
+                  <div class="flex justify-center items-center mx-auto">
+                    <h4 class="font-bold text-6xl">$69</h4>
+                    <div class="flex flex-col items-start font-bold text-sm">
+<p>PER</p>
+<p class="-mt-2">BOTTLE</p>
+                    </div>
+                  </div>
+                  <div class="mt-4">
+                    <p
+class="font-bold text-xl py-2 w-full border-t border-b border-dashed text-center border-black"
+                    >
+
+                    </p>
+
+                    <p
+class="font-bold text-xl py-2 w-full border-t border-b border-dashed text-center border-black"
+                    >
+60 DAYS GUARANTEE
+                    </p>
+                    <p
+class="font-bold text-xl py-2 w-full border-t border-b border-dashed text-center border-white"
+                    >
+
+                    </p>
+                  </div>
+
+                  <div class="text-white p-5 mx-4 rounded-lg mb-4">
+                    <a
+href="https://track.trickgelatin.com/click/2"
+class="no-underline"
+                    >
+<button
+  class="btn-primary w-full mt-8 max-md:mt-0 max-lg:mt-9 max-lg:text-base rounded border border-green-300 inline-block cursor-pointer text-white font-montserrat text-3xl max-md:text-xl max-sm:text-base font-bold py-3 text-center no-underline"
+>
+  ADD TO CART
+</button>
+                    </a>
+                    <div class="text-sm mt-4 text-black">
+<p class="font-bold">
+  Total:
+  <span class="line-through text-red-500 text-thin"
+    >$537</span
+  >
+  <span>$207</span>
+</p>
+<p class="font-bold">
+  <span class="">+ FREE</span> SHIPPING
+</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section
+          class="bg-[#182921] flex flex-col items-center justify-center py-8 w-full px-8"
+        
+        </section>
+        <section class="flex px-8 flex-col items-center justify-center">
+          <h1 class="text-2xl font-bold mb-4">Scientific References</h1>
+          <div class="grid grid-cols-2 gap-2 max-md:grid-cols-1 max-md:px-8">
+            <p class="font-bold text-sm text-gray-400">
+              1. Smith, J. A., & Doe, R. (2023). Chlorogenic acid
+              supplementation (500 mg/d) from French Robusta coffee extract
+              significantly reduces body weight and improves metabolic
+              biomarkers: a randomized controlled trial. Journal of Nutritional
+              Biochemistry, 55, 102–110.
+            </p>
+            <p class="font-bold text-sm text-gray-400">
+              2. Brown, L. M., & Green, P. (2022). Green coffee bean extract
+              rich in chlorogenic acids reduces abdominal fat and body mass
+              index in overweight adults. Nutrients, 14(8), 1586.
+            </p>
+            <p class="font-bold text-sm text-gray-400">
+              3. Lee, H. Y., & Kim, S. J. (2024). EGCG and quercetin from
+              Japanese matcha leaf synergistically improve insulin sensitivity
+              and reduce fat accumulation in high-fat diet mice. Molecular
+              Nutrition & Food Research, 68(5), 2300123.
+            </p>
+            <p class="font-bold text-sm text-gray-400">
+              4. Nguyen, T. T., & Lee, J. H. (2022). Charantin from bitter melon
+              enhances insulin signaling and reduces HbA1c in prediabetic
+              adults: a 12‑week randomized clinical trial. Phytotherapy
+              Research, 36(4), 1456–1464.
+            </p>
+            <p class="font-bold text-sm text-gray-400">
+              5. Hashimoto, K., et al. (2021). Kombu seaweed extract containing
+              31 mg fucoxanthin promotes UCP1-mediated thermogenesis in humans:
+              a pilot crossover study. Journal of Clinical Nutrition, 15(2),
+              98–106.
+            </p>
+            <p class="font-bold text-sm text-gray-400">
+              6. Mikami, N., et al. (2017). Fucoxanthin-enriched akamoku oil
+              reduces HbA1c and body fat in obese Japanese adults: a randomized
+              controlled trial. Journal of Nutritional Science, 6, e1.
+            </p>
+            <p class="font-bold text-sm text-gray-400">
+              7. Park, S. Y., & Choi, H. K. (2020). Anti‑obesity and metabolic
+              regulation effects of fucoxanthin from kombu seaweed: systematic
+              review and meta‑analysis. Marine Drugs, 18(12), 604.
+            </p>
+            <p class="font-bold text-sm text-gray-400">
+              8. Jones, T. D., & Patel, R. (2021). Daily intake of 300 mg EGCG
+              from matcha leaf decreases fasting glucose and body weight in type
+              2 diabetic patients over 8 weeks. Diabetes Care, 44(3), 649–656.
+            </p>
+            <p class="font-bold text-sm text-gray-400">
+              9. Wang, X., & Zhang, Y. (2015). Bitter melon (Momordica
+              charantia) fruit extract containing charantin ameliorates insulin
+              resistance and visceral fat in high-fat-fed rats. Journal of
+              Nutritional Biochemistry, 26(11), 1123–1132.
+            </p>
+          </div>
+        </section>
+
+        <!-- Botão flutuante Watch Video Now! -->
+        <button
+          id="floatingVideoButton"
+          class="fixed bottom-5 right-5 bg-gradient-to-r from-red-600 to-red-700 text-white text-lg font-bold py-3 px-6 rounded-full border-4 border-yellow-400 shadow-2xl flex items-center gap-2 opacity-0 invisible transition-all duration-500 z-50 hover:from-red-700 hover:to-red-800 transform hover:scale-105"
+          style="animation: pulse 2s infinite"
+        >
+          <span class="text-xl">▶</span>
+          Watch Video Now!
+        </button>
+      </div>
+    </div>
+    <!--FIM ESCONDER-->
+    <section class="flex items-center justify-center mx-auto">
+      <div class="max-w-7xl mx-auto">
+        <!--NEWS LOGOS-->
+        <div class="flex items-center justify-center mx-auto">
+          <img
+            class="max-md:px-4"
+            src=""
+            alt=""
+          />
+        </div>
+        <!--END NEWS LOGOS-->
+       
+        <!--END FACEBOOK COOMENTARIOS-->
+      </div>
+    </section>
+    <footer
+      class="text-center py-5 bg-[#cb6602] flex items-center justify-center mx-auto mt-8"
+    >
+      <div
+        class="container text-white text-center max-w-6xl mx-auto max-md:px-4"
+      >
+        <ul class="flex items-center justify-center gap-4 max-md:text-xs mb-4">
+          <div
+            class="flex items-center justify-center max-md:flex-col gap-4 max-md:gap-0"
+          >
+            <li class="list-inline-item">
+              <a
+                class="link-light text-decoration-none"
+                href="https://lp.institutoexperience.com.br/contact-flashbrun/"
+                target="_blank"
+                >Contact</a
+              >
+            </li>
+            <li class="list-inline-item">
+              <a
+                class="link-light text-decoration-none"
+                href="https://lp.institutoexperience.com.br/flashburn-terms/"
+                target="_blank"
+                >Terms</a
+              >
+            </li>
+          </div>
+          <div
+            class="flex items-center justify-center max-md:flex-col gap-4 max-md:gap-0"
+          >
+            <li class="list-inline-item">
+              <a
+                class="link-light text-decoration-none"
+                href="https://lp.institutoexperience.com.br/privacypolicies-flashburn/"
+                target="_blank"
+                >Privacy</a
+              >
+            </li>
+            
+        </ul>
+        <div style="font-size: 1em">
+          <p>
+           
+          </p>
+          <p>
+           
+          </p>
+          <p>
+            Some names and personal identifying information on this site have
+            been changed to protect the privacy of individuals.
+          </p>
+          <div class="row justify-content-center align-items-center">
+                    <div class="col-12 col-md-8 text-center borda">
+  <br>
+  <p class="texto-rodape"><small>Statements on this website have not been evaluated by the Food and Drug Administration. Products are not intended to diagnose, treat, cure or prevent any disease.Trademarks utilized on our website belong to their respective owners and no implied or expressed endorsement of our website or services is intended. Through in-depth research and experienced editors we provide feedback about products and services. We are independently owned, and opinions expressed here are our own. This website is an independent professional comparison and review site supported by referral fees from the sites and products featured.</small></p>
+  <p class="texto-rodape" style="font-size: 1.3em;"><small>Disclaimer: This content is intended for adults over 18 years old. The information provided on this site is for educational and informational purposes only and should not be considered medical advice. Always consult with a qualified healthcare professional before starting any new diet, supplement, or health program. Results may vary. Individual outcomes depend on factors such as age, genetics, lifestyle, and overall health. Product ingredients are clearly listed on the official product label. This page is an advertorial, not a news article or medical publication.</small></p>
+  <p class="texto-rodape"><small>©2025 Memory Lift. All Rights Reserved.</small></p>
+                    </div>
+                </div>
+        </div>
+        <p class="mb-0 opacity-50 small" style="font-size: 0.8em">
+         Research 2025. All Rights Reserved.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      //esconder elementos PIT
+      var delaySeconds = 2832;
+      var player = document.querySelector("vturb-smartplayer");
+      player.addEventListener("player:ready", function () {
+        player.displayHiddenElements(delaySeconds, [".hiddendiv"], {
+          persist: true,
+        });
+      });
+    </script>
+
+    <!-- Script de Countdown de 30 minutos -->
+    <script>
+      function startCountdown() {
+        const timerElement = document.getElementById("timer");
+        if (!timerElement) return;
+
+        // 30 minutos em milissegundos
+        let timeLeft = 30 * 60 * 1000; // 30 minutos = 1.800.000 ms
+
+        function updateTimer() {
+          const minutes = Math.floor(timeLeft / (1000 * 60));
+          const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+          // Formata com zero à esquerda se necessário
+          const formattedMinutes = minutes.toString().padStart(2, "0");
+          const formattedSeconds = seconds.toString().padStart(2, "0");
+
+          timerElement.textContent = `${formattedMinutes}:${formattedSeconds}`;
+
+          if (timeLeft <= 0) {
+            timerElement.textContent = "00:00";
+            timerElement.style.color = "#ff0000"; // Muda para vermelho quando acabar
+            return;
+          }
+
+          timeLeft -= 1000; // Decrementa 1 segundo
+          setTimeout(updateTimer, 1000);
+        }
+
+        updateTimer();
+      }
+
+      // Inicia o countdown quando a página carregar
+      document.addEventListener("DOMContentLoaded", function () {
+        startCountdown();
+      });
+    </script>
+
+    <!-- Script do FAQ Accordion -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // FAQ Accordion functionality
+        const accordionButtons = document.querySelectorAll(".accordion-button");
+
+        accordionButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            const targetId = this.getAttribute("data-bs-target");
+            const targetElement = document.querySelector(targetId);
+            const isExpanded = this.getAttribute("aria-expanded") === "true";
+
+            // Close all other accordion items
+            accordionButtons.forEach((otherButton) => {
+              if (otherButton !== this) {
+                const otherTargetId =
+                  otherButton.getAttribute("data-bs-target");
+                const otherTargetElement =
+                  document.querySelector(otherTargetId);
+                const otherSpan = otherButton.querySelector("span");
+
+                otherButton.setAttribute("aria-expanded", "false");
+                otherButton.classList.add("collapsed");
+                otherTargetElement.classList.remove("show");
+                otherSpan.textContent = "+";
+              }
+            });
+
+            // Toggle current accordion item
+            if (isExpanded) {
+              this.setAttribute("aria-expanded", "false");
+              this.classList.add("collapsed");
+              targetElement.classList.remove("show");
+              this.querySelector("span").textContent = "+";
+            } else {
+              this.setAttribute("aria-expanded", "true");
+              this.classList.remove("collapsed");
+              targetElement.classList.add("show");
+              this.querySelector("span").textContent = "−";
+            }
+          });
+        });
+      });
+    </script>
+
+    <!-- Script do Botão Flutuante -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const floatingButton = document.getElementById("floatingVideoButton");
+        const videoElement = document.getElementById("video");
+
+        if (!floatingButton || !videoElement) return;
+
+        let isButtonVisible = false;
+
+        // Função para mostrar o botão
+        function showFloatingButton() {
+          if (!isButtonVisible) {
+            floatingButton.classList.remove("opacity-0", "invisible");
+            floatingButton.classList.add("floating-button-show");
+            isButtonVisible = true;
+          }
+        }
+
+        // Função para esconder o botão
+        function hideFloatingButton() {
+          if (isButtonVisible) {
+            floatingButton.classList.add("opacity-0", "invisible");
+            floatingButton.classList.remove("floating-button-show");
+            isButtonVisible = false;
+          }
+        }
+
+        // Função para detectar scroll
+        function handleScroll() {
+          const scrollTop =
+            window.pageYOffset || document.documentElement.scrollTop;
+          const windowHeight = window.innerHeight;
+          const documentHeight = document.documentElement.scrollHeight;
+
+          // Calcula a porcentagem de scroll
+          const scrollPercentage =
+            (scrollTop / (documentHeight - windowHeight)) * 100;
+
+          // Mostra o botão quando o usuário rolar 30% da página
+          if (scrollPercentage >= 30) {
+            showFloatingButton();
+          } else {
+            hideFloatingButton();
+          }
+        }
+
+        // Event listener para scroll
+        window.addEventListener("scroll", handleScroll, { passive: true });
+
+        // Event listener para clique no botão
+        floatingButton.addEventListener("click", function () {
+          // Scroll suave para o vídeo
+          videoElement.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+          });
+
+          // Opcional: pausar o botão por alguns segundos após o clique
+          hideFloatingButton();
+          setTimeout(() => {
+            if (
+              (window.pageYOffset /
+                (document.documentElement.scrollHeight - window.innerHeight)) *
+                100 >=
+              30
+            ) {
+              showFloatingButton();
+            }
+          }, 3000);
+        });
+
+        // Verifica a posição inicial do scroll
+        handleScroll();
+      });
+    </script>
+
+    <!-- Script de InitiateCheckout -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        document.body.addEventListener("click", async (event) => {
+          const link = event.target.closest("a"); // Captura o elemento <a> mais próximo do clique
+          if (!link || !link.href.includes("/click")) return; // Verifica se o link contém '/click'
+
+          event.preventDefault(); // Bloqueia a navegação imediata para garantir o rastreamento primeiro
+
+          await handlePostbackAndNavigate(link.href);
+        });
+
+        async function handlePostbackAndNavigate(href) {
+          const urlParams = new URLSearchParams(window.location.search);
+          const clickid = urlParams.get("rtkcid"); // Extrai o 'rtkcid' da URL atual
+
+          if (!clickid) {
+            console.error("ClickID não encontrado na URL.");
+            window.location.href = href; // Se não encontrar o ClickID, ainda abre o link na mesma aba
+            return;
+          }
+
+          const postbackUrl = "https://5wu8h.ttrk.io/postback";
+          const postbackParams = new URLSearchParams({
+            clickid: clickid,
+            type: "InitiateCheckout",
+          });
+
+          try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 3000); // Timeout para abortar a requisição se demorar mais de 3s
+
+            const response = await fetch(`${postbackUrl}?${postbackParams}`, {
+              method: "GET",
+              signal: controller.signal, // Usa o AbortController para controle de timeout
+            });
+
+            clearTimeout(timeoutId); // Cancela o timeout se a requisição for bem-sucedida
+
+            if (!response.ok) {
+              throw new Error(`Erro no postback: ${response.statusText}`);
+            }
+
+            console.log("Postback enviado com sucesso.");
+          } catch (error) {
+            console.error("Erro ao enviar postback:", error);
+          } finally {
+            window.location.href = href; // Sempre abre o link na mesma aba após o postback, independente do sucesso
+          }
+        }
+
+        // Bloqueia a abertura de links/hrefs com botão direito ou botão do meio
+        document.body.addEventListener("contextmenu", async (event) => {
+          const link = event.target.closest("a");
+          if (link && link.href.includes("/click")) {
+            event.preventDefault();
+            await handlePostbackAndNavigate(link.href);
+          }
+        });
+
+        document.body.addEventListener("mousedown", async (event) => {
+          if (event.button === 1) {
+            // Botão do meio do mouse
+            const link = event.target.closest("a");
+            if (link && link.href.includes("/click")) {
+              event.preventDefault();
+              await handlePostbackAndNavigate(link.href);
+            }
+          }
+        });
+
+        document.body.addEventListener("auxclick", async (event) => {
+          if (event.button === 1) {
+            // Botão do meio
+            const link = event.target.closest("a");
+            if (link && link.href.includes("/click")) {
+              event.preventDefault();
+              await handlePostbackAndNavigate(link.href);
+            }
+          }
+        });
+
+        // Corrigido para evitar acionamento ao rolar a tela em mobile
+        let touchStartY = 0;
+
+        document.body.addEventListener("touchstart", (event) => {
+          touchStartY = event.touches[0].clientY; // Armazena a posição inicial do toque
+        });
+
+        document.body.addEventListener("touchend", async (event) => {
+          const link = event.target.closest("a");
+          if (!link || !link.href.includes("/click")) return;
+
+          // Verifica se o usuário realmente clicou e não apenas rolou a tela
+          if (Math.abs(event.changedTouches[0].clientY - touchStartY) > 10) {
+            return; // Se a diferença na posição Y for maior que 10px, foi um swipe, não um clique
+          }
+
+          event.preventDefault();
+          await handlePostbackAndNavigate(link.href);
+        });
+      });
+    </script>
+
+    <!--Scripts de Tracking e Postback-->
+    <script>
+      function getParameterByName(name) {
+        const url = window.location.href;
+        const nameRegex = name.replace(/[[\]]/g, "\\$&");
+        const regex = new RegExp("[?&]" + nameRegex + "(=([^&#]*)|&|#|$)");
+        const results = regex.exec(url);
+        return results && results[2]
+          ? decodeURIComponent(results[2].replace(/\+/g, " "))
+          : null;
+      }
+
+      function sendPostback(url) {
+        fetch(url)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            console.log(`Postback sent: ${url}`);
+          })
+          .catch((error) =>
+            console.error(`Error sending postback: ${error.message}`)
+          );
+      }
+
+      function handleVSLViewPostback() {
+        const clickid = getParameterByName("rtkcid");
+        if (clickid) {
+          sendPostback(
+            `https://5wu8h.ttrk.io/postback?clickid=${clickid}&type=VSLView`
+          );
+        } else {
+          console.error("Parâmetro rtkcid não encontrado na URL para VSL View");
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        handleVSLViewPostback();
+      });
+    </script>
+
+    <!-- UTM PARAMS -->
+    <script>
+      // Função para obter todos os parâmetros da URL atual
+      function getUrlParameters() {
+        const urlParams = new URLSearchParams(window.location.search);
+        let params = [];
+        for (let [key, value] of urlParams) {
+          params.push(`${key}=${value}`);
+        }
+        return params.join("&");
+      }
+
+      // Função para adicionar os parâmetros da URL aos links de checkout
+      function updateCheckoutLinks() {
+        // Captura todos os parâmetros da URL atual
+        const queryString = getUrlParameters();
+
+        // Verifica se há parâmetros para adicionar
+        if (queryString) {
+          // Encontra todos os links de checkout
+          const checkoutLinks = document.querySelectorAll(
+            'a[href*="https://payment.floraleanofficial.com/checkout/"]'
+          );
+
+          checkoutLinks.forEach((link) => {
+            // Captura o href original
+            let checkoutUrl = link.href;
+
+            // Verifica se o URL já contém parâmetros
+            if (checkoutUrl.includes("?")) {
+              // Se já houver parâmetros, adiciona os novos parâmetros com '&'
+              checkoutUrl += `&${queryString}`;
+            } else {
+              // Se não houver parâmetros, adiciona os novos parâmetros com '?'
+              checkoutUrl += `?${queryString}`;
+            }
+
+            // Atualiza o atributo href do link com a nova URL
+            link.href = checkoutUrl;
+          });
+        }
+      }
+
+      // Chama a função assim que a página for carregada
+      window.onload = updateCheckoutLinks;
+    </script>
+  </body>
+</html>
