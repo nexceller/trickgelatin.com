@@ -1,0 +1,485 @@
+body {
+    margin: 0;
+    font-family: 'Roboto', serif;
+    font-size: 19px;
+    line-height: 1.6;
+    background-color: #fff;
+    color: #252525;
+    overflow-x: hidden;
+}
+
+main {
+    padding: 35px;
+    max-width: 700px;
+    margin: auto;
+    background-color: #fff;
+    color: #252525;
+}
+
+h2,
+h3 {
+    font-size: 40px;
+    margin: 0;
+    padding-bottom: 15px;
+    color: #252525;
+    text-align: left;
+    text-transform: none;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+p,
+ul {
+    font-size: 19px;
+    margin: 0;
+    padding-bottom: 15px;
+    line-height: 1.6;
+}
+
+p span {
+    margin: 8px 0;
+}
+
+li {
+    margin-bottom: 0;
+    padding-bottom: 5px;
+}
+
+.primary-text-highlight {
+    color: black;
+    font-weight: 700;
+}
+
+.secondary-text-bold {
+    font-weight: 700;
+}
+
+.button-container {
+    text-align: center;
+    margin: 0;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.button-caption-left-align {
+    text-align: left;
+}
+
+.pulsating-button {
+    background-color: #CC0000;
+    color: white;
+    border: none;
+    padding: 20px 10px;
+    width: 85%;
+    margin: 0 auto;
+    line-height: 1;
+    font-size: 27px;
+    font-weight: 700;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    animation: pulse 2s infinite;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    text-transform: none;
+}
+
+.pulsating-button:hover {
+    background-color: #990000;
+    transform: scale(1.05);
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    }
+    50% {
+        transform: scale(1.04);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    }
+}
+
+.testimonial {
+    font-style: italic;
+    background-color: #fff;
+    padding: 0;
+    border-left: none;
+    margin: 0;
+    border-radius: 0;
+    text-align: justify;
+}
+
+.testimonial p {
+    font-size: 28px;
+    color: #7a7a7a;
+    font-weight: 400;
+    line-height: 1.5;
+    padding: 0 0 15px 0;
+    text-align: center;
+}
+
+.main-article-image,
+.button-section-image,
+.image-link img,
+.testimonial-image {
+    width: calc(100% + 2 * 35px);
+    max-width: 700px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 5px;
+}
+
+.image-link {
+    display: block;
+    text-align: center;
+}
+
+.button-container .image-link img {
+    margin-bottom: 0;
+    padding-bottom: 15px;
+}
+
+#attention-heading {
+    color: #CC0000;
+    text-align: center;
+}
+
+#testimonial-section-heading {
+    color: #CC0000;
+    text-align: center;
+}
+
+.abc-header {
+    background: #fff;
+    border-bottom: 1px solid #e5e7eb;
+    font-family: 'Roboto', sans-serif;
+}
+
+.abc-header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    padding: 0 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.abc-logo img {
+    height: 40px;
+    display: block;
+}
+
+.abc-nav {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.abc-nav a {
+    font-weight: 600;
+    color: #111827;
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+}
+
+.abc-nav a:hover {
+    color: #CC0000;
+}
+
+.abc-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.abc-actions button {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: #111827;
+}
+
+.abc-actions button:hover {
+    color: #CC0000;
+}
+
+@media (max-width: 768px) {
+    body {
+        font-size: 16px;
+    }
+
+    main {
+        padding-left: 0;
+        padding-right: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    h2,
+    h3 {
+        font-size: 26px;
+        margin: 0;
+        padding: 15px 15px 0 15px;
+        text-align: left;
+        color: #252525;
+    }
+
+    p,
+    ul {
+        font-size: 19px;
+        margin: 0;
+        padding: 0 15px 15px 15px;
+        line-height: 1.7;
+        text-align: left;
+    }
+
+    .intro-paragraph {
+        font-size: 16px;
+    }
+
+    li {
+        margin-bottom: 0;
+        padding-bottom: 5px;
+    }
+
+    .pulsating-button {
+        height: 90px;
+        padding: 0 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 27px;
+        border-radius: 5px;
+    }
+
+    .testimonial {
+        margin: 0;
+        padding: 0;
+        text-align: left;
+    }
+
+    .testimonial p {
+        font-size: 28px;
+        color: #7a7a7a;
+        font-weight: 400;
+        text-align: center;
+    }
+
+    .main-article-image,
+    .button-section-image,
+    .image-link img {
+        max-width: 100%;
+        margin: 0;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    p+.image-link img,
+    h2+.image-link img,
+    h3+.image-link img {
+        margin-top: 0;
+    }
+
+    .image-link img+p,
+    .image-link img+.button-container {
+        margin-top: 0;
+    }
+
+    .button-container {
+        margin: 0;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        text-align: center;
+    }
+
+    .button-caption-left-align {
+        text-align: left;
+    }
+
+    .button-container p {
+        text-align: center;
+        padding-bottom: 10px;
+    }
+
+    .testimonial-image {
+        width: calc(100vw - 20px);
+        margin: 0 auto;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .testimonial .testimonial-image+p {
+        margin-top: 0;
+        padding: 0 15px 15px 15px;
+    }
+
+    li {
+        padding: 0 15px;
+    }
+
+    #attention-heading {
+        color: #CC0000;
+        text-align: center;
+    }
+
+    #testimonial-section-heading {
+        color: #CC0000;
+        text-align: center;
+    }
+
+    .mobile-highlight-phrase {
+        color: #CC0000;
+        text-align: center;
+        font-size: 33px;
+        padding-left: 15px;
+        padding-right: 15px;
+        margin: 0;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 5px 10px;
+        min-height: 38px;
+    }
+
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    header .icon-link {
+        font-size: 1.2rem;
+    }
+
+    header .search-icon {
+        left: 10px;
+    }
+
+    .hamburger-icon {
+        right: 10px;
+    }
+
+    main {
+        padding-left: 0;
+        padding-right: 0;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    h2,
+    h3 {
+        font-size: 26px;
+        padding: 10px 10px 0 10px;
+    }
+
+    p,
+    ul {
+        font-size: 19px;
+        padding: 0 10px 10px 10px;
+        line-height: 1.6;
+    }
+
+    .intro-paragraph {
+        font-size: 16px;
+    }
+
+    .pulsating-button {
+        height: 90px;
+        padding: 0 10px;
+        font-size: 27px;
+    }
+
+    .testimonial {
+        padding: 0;
+        margin-bottom: 0;
+    }
+
+    .testimonial p {
+        font-size: 28px;
+        text-align: center;
+    }
+
+    .main-article-image,
+    .button-section-image,
+    .image-link img {
+        margin: 0 auto;
+        padding-bottom: 10px;
+    }
+
+    p+.image-link img,
+    h2+.image-link img,
+    h3+.image-link img {
+        margin-top: 0;
+    }
+
+    .image-link img+p,
+    .image-link img+.button-container {
+        margin-top: 0;
+    }
+
+    .button-container {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .button-caption-left-align {
+        text-align: left;
+    }
+
+    .button-container p {
+        text-align: center;
+        padding-bottom: 8px;
+    }
+
+    .testimonial-image {
+        width: calc(100vw - 10px);
+        margin: 0 auto;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .testimonial .testimonial-image+p {
+        margin-top: 0;
+        padding: 0 10px 10px 10px;
+    }
+
+    li {
+        padding: 0 10px;
+    }
+
+    #attention-heading {
+        color: #CC0000;
+        text-align: center;
+    }
+
+    #testimonial-section-heading {
+        color: #CC0000;
+        text-align: center;
+    }
+
+    .mobile-highlight-phrase {
+        font-size: 33px;
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-top: 0;
+        margin-bottom: 0;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .abc-nav,
+    .abc-actions .abc-apps,
+    .abc-actions .abc-search {
+        display: none;
+    }
+}
